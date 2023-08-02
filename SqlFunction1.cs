@@ -20,13 +20,12 @@ public partial class UserDefinedFunctions
 
 
 		var html = s;
+		string newLine = Environment.NewLine;
 		
-		html = Regex.Replace(html, "<br/>", Environment.NewLine, RegexOptions.IgnoreCase);
-		html = Regex.Replace(html, "<br />", Environment.NewLine, RegexOptions.IgnoreCase);
-		html = Regex.Replace(html, "<br>", Environment.NewLine, RegexOptions.IgnoreCase);	
-		html = Regex.Replace(html, "&nbsp;", Environment.NewLine, RegexOptions.IgnoreCase);
-		html = WebUtility.HtmlDecode(html);
+		html = Regex.Replace(html, "<br />|<br/>|<br>|</ br>|</br>)", newLine, RegexOptions.IgnoreCase);
+		html = Regex.Replace(html, "&nbsp;", newLine, RegexOptions.IgnoreCase);		
 		html = Regex.Replace(html, "<.*?>", string.Empty);
+		html = WebUtility.HtmlDecode(html);
 
 		return html;
 	}
